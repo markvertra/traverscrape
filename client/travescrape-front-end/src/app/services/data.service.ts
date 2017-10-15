@@ -8,8 +8,13 @@ export class DataService {
   BASE_URL = 'http://localhost:3000';
   constructor(private http: Http) {}
 
-  getGYGtopMain(city: String) {
+  getGYGtopMain(city: string) {
     return this.http.get(`${this.BASE_URL}/gyg/${city}`)
+    .map((res) => res.json());
+  }
+
+  getOperator(product: object) {
+    return this.http.post(`${this.BASE_URL}/gyg/operator`, product)
     .map((res) => res.json());
   }
 }

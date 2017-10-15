@@ -1,16 +1,44 @@
-<button (click)="handleGYGResultsSearch()">Get GYG Results</button>
+<button (click)="handleGYGReviewSort()">Sort by Reviews</button>
+<button (click)="handleGYGHighPriceSort()">Sort by Highest Price</button>
+<button (click)="handleGYGLowPriceSort()">Sort by Lowest Price</button>
 
-<table *ngIf="gygResults.length > 0">
+<label>Filter by Title</label>
+<input type="text" [(ngModel)]="titleFilter" (ngModelChange)="handleTitleFilter($event)">
+
+<p *ngIf="titleFilter">{{ filteredResults.length }} out of {{ gygResults.length }} match your query.</p>
+
+<table *ngIf="gygResults.length > 0 && !titleFilter">
   <tr>
-    <th>Rank</th>
+    <th>List Number</th>
+    <th>Main Page Rank</th>
     <th>Title</th>
     <th>Price</th>
     <th>Reviews</th>
   </tr>
-  <tr *ngFor="let result of gygResults">
-    <th>{{ result.number }}</th>
+  <tr *ngFor="let result of gygResults; index as i">
+    <th>{{ i + 1 }}</th>
+    <th>{{ result.mainPageRank }}</th>
     <th><a href="{{result.link }}">{{ result.title }}</a></th>
     <th>{{ result.price }}</th>
     <th>{{ result.reviews }}</th>
+    <button (click)="handleOperatorQuery(result)">Operator?</button>
   </tr>
 </table>
+
+<table *ngIf="gygResults.length > 0 && titleFilter">
+    <tr>
+      <th>List Number</th>
+      <th>Main Page Rank</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Reviews</th>
+    </tr>
+    <tr *ngFor="let result of filteredResults; index as i">
+      <th>{{ i + 1 }}</th>
+      <th>{{ result.mainPageRank }}</th>
+      <th><a href="{{result.link }}">{{ result.title }}</a></th>
+      <th>{{ result.price }}</th>
+      <th>{{ result.reviews }}</th>
+      <button (click)="handleOperatorQuery(result)">Operator?</button>
+    </tr>
+  </table>
