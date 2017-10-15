@@ -1,0 +1,1 @@
+ /* no display - blocked mbox */ mboxFactories.get('default').get('viatorCategoryAffinity_Mbox',0).setOffer(new mboxOfferDefault()).loaded();
