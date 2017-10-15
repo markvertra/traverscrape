@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+}
+
+tr {
+  margin: 8px 0px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.search-bars {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.search-bars input {
+  padding: 5px;
+  border: none;
+  background-color: rgba(59, 52, 52, 0.2);
+}
+
+.table-title {
+  border: 1px solid black;
+  background-color: rgba(59, 52, 52, 0.1);
+  padding: 10px;
+}
+
+.list-number {
+  width: 8%;
+}
+
+.list-page-rank {
+  width: 8%;
+}
+
+.list-title {
+  width: 48%;
+}
+
+.list-price {
+  width: 8%;
+}
+
+.list-reviews {
+  width: 8%;
+}
+
+.list-operator {
+  width: 30%;
+}

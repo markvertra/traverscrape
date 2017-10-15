@@ -18,6 +18,21 @@ export class GygSearchComponent implements OnInit {
                                                                    this.filteredResults = res; });
   }
 
+
+  handleSortChange(value) {
+    switch (value) {
+      case 'review':
+        this.handleGYGReviewSort();
+        break;
+      case 'highPrice':
+        this.handleGYGHighPriceSort();
+        break;
+      case 'lowPrice':
+        this.handleGYGLowPriceSort();
+        break;
+    }
+  }
+
   handleGYGReviewSort() {
     this.gygResults.sort((a, b) => {
       return b.reviews - a.reviews;
@@ -52,8 +67,13 @@ export class GygSearchComponent implements OnInit {
     });
   }
 
+  handleOperatorFilter(value) {
+    this.filteredResults = this.gygResults.filter((item) => {
+        return item.operator.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+    });
+  }
+
   handleOperatorQuery(product) {
-    console.log(product);
-    this.dataService.getOperator(product).subscribe(res => console.log(res));
+    this.dataService.getOperator(product).subscribe(res => res);
   }
 }
