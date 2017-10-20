@@ -17,4 +17,10 @@ export class DataService {
     return this.http.post(`${this.BASE_URL}/gyg/operator`, product)
     .map((res) => res.json());
   }
+
+  getUpdatedCards(city: string) {
+    return this.http.get(`${this.BASE_URL}/gyg/update/${city}`)
+    .map((res) => res.json());
+  }
+
 }

@@ -9,13 +9,17 @@ import { PlaygroundPageComponent } from './pages/playground-page/playground-page
 import { GygSearchComponent } from './components/gyg-search/gyg-search.component';
 
 import { DataService } from './services/data.service';
+import { LandingComponent } from './pages/landing/landing.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PlaygroundPageComponent,
-    GygSearchComponent
+    GygSearchComponent,
+    LandingComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

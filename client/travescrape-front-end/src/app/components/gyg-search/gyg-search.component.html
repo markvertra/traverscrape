@@ -9,6 +9,7 @@
       <option value="review">Reviews</option>
       <option value="highPrice">Highest Price</option>
       <option value="lowPrice">Lowest Price</option>
+      <option value="ranking">Ranking</option>
     </select>
   </div>
 
@@ -27,15 +28,13 @@
 
 <table *ngIf="gygResults.length > 0 && !titleFilter">
   <tr>
-    <th class="list-number table-title">Id</th>
     <th class="list-page-rank table-title">Main Rank</th>
     <th class="list-title table-title">Title</th>
     <th class="list-price table-title">Price</th>
     <th class="list-reviews table-title">Reviews</th>
     <th class="list-operator table-title">Operator</th>
   </tr>
-  <tr *ngFor="let result of gygResults; index as i">
-    <th class="list-number">{{ i + 1 }}</th>
+  <tr *ngFor="let result of gygResults">
     <th class="list-page-rank">{{ result.mainPageRank }}</th>
     <th class="list-title"><a href="{{result.link }}">{{ result.title }}</a></th>
     <th class="list-price">{{ result.price }}</th>
@@ -47,15 +46,13 @@
 
 <table *ngIf="gygResults.length > 0 && titleFilter">
     <tr>
-      <th class="list-number table-title">Id</th>
       <th class="list-page-rank table-title">Main Page Rank</th>
       <th class="list-title table-title">Title</th>
       <th class="list-price table-title">Price</th>
       <th class="list-reviews table-title">Reviews</th>
       <th class="list-operator table-title">Operator</th>
     </tr>
-    <tr *ngFor="let result of filteredResults; index as i">
-      <th class="list-number">{{ i + 1 }}</th>
+    <tr *ngFor="let result of filteredResults">
       <th class="list-page-rank">{{ result.mainPageRank }}</th>
       <th class="list-title"><a href="{{result.link }}">{{ result.title }}</a></th>
       <th class="list-price">{{ result.price }}</th>

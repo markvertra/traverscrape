@@ -14,48 +14,53 @@ export class GygSearchComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.getGYGtopMain('barcelona').subscribe(res => { this.gygResults = res,
-                                                                   this.filteredResults = res; });
+    this.dataService.getGYGtopMain('barcelona').subscribe(res => { this.gygResults = this.handleGYGRankSort(res),
+                                                                   this.filteredResults = this.handleGYGRankSort(res); });
   }
 
 
   handleSortChange(value) {
     switch (value) {
       case 'review':
-        this.handleGYGReviewSort();
+        this.handleGYGReviewSort(this.gygResults);
+        this.handleGYGReviewSort(this.filteredResults);
         break;
       case 'highPrice':
-        this.handleGYGHighPriceSort();
+        this.handleGYGHighPriceSort(this.gygResults);
+        this.handleGYGHighPriceSort(this.filteredResults);
         break;
       case 'lowPrice':
-        this.handleGYGLowPriceSort();
+        this.handleGYGLowPriceSort(this.gygResults);
+        this.handleGYGLowPriceSort(this.filteredResults);
+        break;
+      case 'ranking':
+        this.handleGYGRankSort(this.gygResults);
+        this.handleGYGRankSort(this.filteredResults);
         break;
     }
   }
 
-  handleGYGReviewSort() {
-    this.gygResults.sort((a, b) => {
-      return b.reviews - a.reviews;
-    });
-    this.filteredResults.sort((a, b) => {
+  handleGYGReviewSort(array) {
+    array.sort((a, b) => {
       return b.reviews - a.reviews;
     });
   }
 
-  handleGYGHighPriceSort() {
-    this.gygResults.sort((a, b) => {
-      return parseFloat(b.price.slice(1)) - parseFloat(a.price.slice(1));
+  handleGYGRankSort(array): Array<object> {
+    array.sort((a, b) => {
+      return a.mainPageRank - b.mainPageRank;
     });
-    this.filteredResults.sort((a, b) => {
+    return array;
+  }
+
+  handleGYGHighPriceSort(array) {
+    array.sort((a, b) => {
       return parseFloat(b.price.slice(1)) - parseFloat(a.price.slice(1));
     });
   }
 
-  handleGYGLowPriceSort() {
-    this.gygResults.sort((a, b) => {
-      return parseFloat(a.price.slice(1)) - parseFloat(b.price.slice(1));
-    });
-    this.filteredResults.sort((a, b) => {
+  handleGYGLowPriceSort(array) {
+    array.sort((a, b) => {
       return parseFloat(a.price.slice(1)) - parseFloat(b.price.slice(1));
     });
   }
@@ -76,4 +81,5 @@ export class GygSearchComponent implements OnInit {
   handleOperatorQuery(product) {
     this.dataService.getOperator(product).subscribe(res => res);
   }
+
 }
