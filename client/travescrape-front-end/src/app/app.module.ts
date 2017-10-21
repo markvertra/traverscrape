@@ -14,6 +14,8 @@ import { DataService } from './services/data.service';
 import { LandingComponent } from './pages/landing/landing.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OperatorPageComponent } from './pages/operator-page/operator-page.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { ProductDisplayComponent } from './components/product-display/product-display.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { OperatorPageComponent } from './pages/operator-page/operator-page.compo
     LandingComponent,
     NavbarComponent,
     OperatorPageComponent,
+    ProductPageComponent,
+    ProductDisplayComponent,
   ],
   imports: [
     BrowserModule,
