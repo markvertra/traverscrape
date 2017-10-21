@@ -40,7 +40,9 @@ router.get('/update/:city', (req, res, next) => {
   $(".activity-card").each((i, elem) => {
     card = {};
     card.historicRank = [];
-    card.historicRank.push({date: new Date(), rank: i + 1});
+    card.historicRank.push({date: new Date(), 
+                            rank: i + 1, 
+                            reviews: (parseInt($(elem).find('.rating-total').text().split(' ')[0]) || 0)});
     card.mainPageRank = i + 1;
     card.city = req.params.city;
     card.title = $(elem).find('.activity-card-title').text();
