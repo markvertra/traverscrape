@@ -1,3 +1,21 @@
-<p>
-  product-display works!
-</p>
+<div *ngIf="product">
+  <h2>{{ product.title }}</h2>
+  <h3>Provided by <a [routerLink]="['/operator', product.operator]">{{ product.operator }}</a></h3>
+  <h3>Price: {{ product.price }}</h3>
+  <h3>Rank: {{ product.mainPageRank }}</h3>
+  <h3><a href="{{product.link}}">GYG Link</a></h3>
+
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Rank</th>
+      <th>Reviews</th>
+    </tr>
+    <tr *ngFor="let product of product.historicRank">
+      <th>{{ product.date | date }}</th>
+      <th>{{ product.rank }}</th>
+      <th *ngIf="product.reviews">{{ product.reviews }}</th>
+      <th *ngIf="!product.reviews">N/A</th>
+    </tr>
+  </table>
+</div>

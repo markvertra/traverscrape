@@ -23,6 +23,11 @@ export class DataService {
     .map((res) => res.json());
   }
 
+  getProductsByOperator(name: string) {
+    return this.http.get(`${this.BASE_URL}/gyg/operator/${name}`)
+    .map((res) => res.json());
+  }
+
   getUpdatedCards(city: string) {
     return this.http.get(`${this.BASE_URL}/gyg/update/${city}`)
     .map((res) => res.json());

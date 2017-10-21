@@ -5,6 +5,6 @@ import { ProductPageComponent } from '../pages/product-page/product-page.compon
 
 export const productRoutes: Routes  = [
   { path: '', component: PlaygroundPageComponent },
-  { path: 'operator/:id', component: OperatorPageComponent },
+  { path: 'operator/:name', component: OperatorPageComponent },
   { path: 'product/:id', component: ProductPageComponent }
 ];

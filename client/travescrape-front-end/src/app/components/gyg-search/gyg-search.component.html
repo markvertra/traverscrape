@@ -36,10 +36,10 @@
   </tr>
   <tr *ngFor="let result of gygResults">
     <th class="list-page-rank">{{ result.mainPageRank }}</th>
-    <th class="list-title"><a href="{{result.link }}">{{ result.title }}</a></th>
+    <th class="list-title"><a [routerLink]="['/product', result._id ]">{{ result.title }}</a></th>
     <th class="list-price">{{ result.price }}</th>
     <th class="list-reviews">{{ result.reviews }}</th>
-    <th class="list-operator" *ngIf="result.operator">{{ result.operator }}</th>
+    <th class="list-operator" *ngIf="result.operator"><a [routerLink]="['/operator', result.operator ]">{{ result.operator }}</a></th>
     <button class="list-operator" *ngIf="!result.operator" (click)="handleOperatorQuery(result)">Operator?</button>
   </tr>
 </table>
@@ -54,10 +54,10 @@
     </tr>
     <tr *ngFor="let result of filteredResults">
       <th class="list-page-rank">{{ result.mainPageRank }}</th>
-      <th class="list-title"><a href="{{result.link }}">{{ result.title }}</a></th>
+      <th class="list-title"><a [routerLink]="['/product', result._id ]">{{ result.title }}</a></th>
       <th class="list-price">{{ result.price }}</th>
       <th class="list-reviews">{{ result.reviews }}</th>
-      <th class="list-operator" *ngIf="result.operator">{{ result.operator }}</th>
+      <th class="list-operator" *ngIf="result.operator"><a [routerLink]="['/operator', result.operator ]">{{ result.operator }}</a></th>
       <button class="list-operator" *ngIf="!result.operator" (click)="handleOperatorQuery(result)">Operator?</button>
     </tr>
   </table>

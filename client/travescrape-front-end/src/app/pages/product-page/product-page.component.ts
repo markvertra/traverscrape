@@ -8,7 +8,6 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit {
-
   product: object;
 
   constructor(private route: ActivatedRoute,
@@ -22,7 +21,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   getProduct(id) {
-    this.dataService.getProductById(id).subscribe(res => this.product = res)
+    this.dataService.getProductById(id).subscribe(res => this.product = res);
   }
 
 }

@@ -16,6 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { OperatorPageComponent } from './pages/operator-page/operator-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { ProductDisplayComponent } from './components/product-display/product-display.component';
+import { OperatorProductDisplayComponent } from './components/operator-product-display/operator-product-display.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ProductDisplayComponent } from './components/product-display/product-di
     OperatorPageComponent,
     ProductPageComponent,
     ProductDisplayComponent,
+    OperatorProductDisplayComponent,
   ],
   imports: [
     BrowserModule,

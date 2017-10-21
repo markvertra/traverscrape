@@ -1,0 +1,16 @@
+<h2 *ngIf="productList">Products By {{ productList[0].operator }}</h2>
+
+<table>
+  <tr>
+    <th class="list-rank table-title">Rank</th>
+    <th class="list-title table-title">Title</th>
+    <th class="list-price table-title">Price</th>
+    <th class="list-reviews table-title">Reviews</th>
+  </tr>
+  <tr *ngFor="let product of productList">
+    <th class="list-rank">{{ product.mainPageRank }}</th>
+    <th class="list-title"><a [routerLink]="['/product', product._id ]">{{ product.title }}</a></th>
+    <th class="list-price">{{ product.price }}</th>
+    <th class="list-reviews">{{ product.reviews }}</th>
+  </tr>
+</table>
