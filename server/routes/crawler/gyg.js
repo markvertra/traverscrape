@@ -5,6 +5,7 @@ const jsonframe = require('jsonframe-cheerio');
 const request = require('request');
 const fs = require('fs');
 const GYGProduct = require('../../models/gygProduct');
+const Operator = require('../../models/operator');
 
 router.get('/save/:city', (req, res, next) => {
   // request("http://www.getyourguide.com/s/?q=" + req.params.city, (request, response, body)=> {
@@ -38,26 +39,18 @@ router.get('/update/:city', (req, res, next) => {
   let $ = cheerio.load(fs.readFileSync('/Users/markallen/Documents/Projects/Travescrape/server/examples/gyg-example2.htm'));
   let cards = [];
   $(".activity-card").each((i, elem) => {
-    card = {};
-    card.historicRank = [];
-    card.historicRank.push({date: new Date(), 
+    card = {}
+    card.historicRank = {date: new Date(), 
                             rank: i + 1, 
-                            reviews: (parseInt($(elem).find('.rating-total').text().split(' ')[0]) || 0)});
-    card.mainPageRank = i + 1;
-    card.city = req.params.city;
-    card.title = $(elem).find('.activity-card-title').text();
-    card.shortDescription = $(elem).find('.small-description').text();
+                            reviews: (parseInt($(elem).find('.rating-total').text().split(' ')[0]) || 0)};
     card.link = $(elem).find('.activity-card-link').attr('href');
-    card.price = $(elem).find('.price').text();
-    card.reviews = (parseInt($(elem).find('.rating-total').text().split(' ')[0]) || 0);
-    card.duration = $(elem).find('.activity-duration').text().split(' ')[0];
     splitLink = card.link.split('-');
     card.GYGid = splitLink[splitLink.length - 1].slice(0, -1);
     cards[i] = card;
     });
 
     cards.forEach(card => {
-    GYGProduct.findOneAndUpdate({GYGid: card.GYGid}, card, {upsert:true}, (err, docs) => {
+    GYGProduct.findOneAndUpdate({GYGid: card.GYGid}, {$push: {historicRank: card.historicRank }}, {upsert:true}, (err, docs) => {
       if (err) {
         console.log(err);
       }
@@ -76,13 +69,35 @@ router.get('/:city', (req, res, next) => {
   });
 });
 
+router.get('/operator/:name', (req, res, next) => {
+  
+    GYGProduct.find({operator: req.params.name}, (err, docs) => {
+      if (err) {
+        res.send(err);
+      }
+    res.json(docs);
+    });
+  });
+
+
 router.post('/operator', (req, res, next) => {
 
    request(req.body.link, (request, response, body) => {
     let $ = cheerio.load(body);
+    let operator = $('.activity-supplier-link').text()
     const updatedProduct = {
-      operator: $('.activity-supplier-link').text()
+      operator: operator
     }
+
+    const updatedOperator = {
+      name: operator
+    }
+
+    // operator.findOneAndUpdate({name: operator}, updatedOperator, {upsert:true}, (err, docs) => {
+    //   if (err) {
+    //     console.log("ERROR" + err);
+    //   }
+    // });
     
     GYGProduct.findByIdAndUpdate(req.body._id, updatedProduct, (err, docs) => {
       if (err) {
